@@ -26,7 +26,7 @@ int	ft_putstr(char *s)
 	i = 0;
 	if (!s)
 	{
-		if (write (1, "(null)", 6) == -1)
+		if (write (1, "(null)", 6) != 6)
 			return (-1);
 		return (6);
 	}
@@ -51,13 +51,15 @@ int	ft_put_number(long long n, int *i)
 	if (n >= 10)
 	{
 		ft_put_number(n / 10, i);
+		if (*i == -1)
+			return (-1);
 		ft_put_number(n % 10, i);
 	}
 	else
 	{
 		n = n + 48;
 		if (write (1, &n, 1) != 1)
-			return (-1);
+			*i = -2;
 		(*i)++;
 	}
 	return (*i);
@@ -74,14 +76,19 @@ int	ft_put_number_hex(unsigned long long n, int caps, int ptr, int *i)
 	if (n >= 16)
 	{
 		ft_put_number_hex(n / 16, caps, 0, i);
+		if (*i == -1)
+			return (-1);
 		ft_put_number_hex(n % 16, caps, 0, i);
 	}
 	else
 	{
 		if (caps == 0)
-			*i = *i + write (1, &(HEX_LOWER[n]), 1);
+			if (write (1, &(HEX_LOWER[n]), 1) != 1)
+				*i = -2;
 		if (caps == 1)
-			*i = *i + write (1, &(HEX_UPPER[n]), 1);
+			if (write (1, &(HEX_UPPER[n]), 1) != 1)
+				*i = -2;
+		(*i)++;
 	}
 	return (*i);
 }
