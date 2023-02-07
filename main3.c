@@ -67,15 +67,15 @@ int	ft_put_number(long long n, int *i, char p_holder)
 	return (*i);
 }
 
-int	ft_put_number_hex(unsigned long long n, int caps, int ptr, int *i)
+int	ft_put_number_hex(unsigned long long n, char p_holder, int ptr, int *i)
 {
-	if (ptr == 1 && caps == 0 && n > 0)
+	if (ptr == 1 && p_holder == 'x' && n > 0)
 	{
 		if (ft_putstr (POINTER_LOW) != 2)
 			return (-1);
 		*i = *i + 2;
 	}
-	if (ptr == 1 && caps == 1 && n > 0)
+	if (ptr == 1 && p_holder == 'X' && n > 0)
 	{
 		if (ft_putstr (POINTER_UPP) != 2)
 			return (-1);
@@ -83,24 +83,23 @@ int	ft_put_number_hex(unsigned long long n, int caps, int ptr, int *i)
 	}
 	if (n >= 16)
 	{
-		ft_put_number_hex(n / 16, caps, 0, i);
+		ft_put_number_hex(n / 16, p_holder, 0, i);
 		if (*i == -1)
 			return (-1);
-		ft_put_number_hex(n % 16, caps, 0, i);
+		ft_put_number_hex(n % 16, p_holder, 0, i);
 	}
 	else
 	{
-		if (caps == 0) 
+		if (p_holder == 'x') 
 			if (write (1, &(HEX_LOWER[n]), 1) != 1)
 				*i = -2;
-		if (caps == 1)
+		if (p_holder == 'X')
 			if (write (1, &(HEX_UPPER[n]), 1) != 1)
 				*i = -2;
 		(*i)++;
 	}
 	return (*i);
 }
-
 
 int	ft_actions(char const *p_holder, va_list arg)
 {
@@ -111,24 +110,20 @@ int	ft_actions(char const *p_holder, va_list arg)
 		return (ft_putchar('%'));
 	else if (*p_holder == 'c')
 		return (ft_putchar(va_arg (arg, int)));
-	else if (*p_holder == 'd' || *p_holder == 'i')
-		return (ft_put_number(va_arg (arg, int), &i, 0));
-	else if (*p_holder == 'u')
-		return (ft_put_number(va_arg (arg, unsigned int), &i, 0));
-	else if (*p_holder == 'x')
-		return (ft_put_number_hex(va_arg (arg, unsigned int), 0, 0, &i));
-	else if (*p_holder == 'X')
-		return (ft_put_number_hex(va_arg (arg, unsigned int), 1, 0, &i));
 	else if (*p_holder == 's')
 		return (ft_putstr(va_arg (arg, char *)));
-	else if (*p_holder == 'p')
-		return (ft_put_number_hex(va_arg (arg, unsigned long long), 0, 1, &i));
-	else if (*p_holder == '#' && *(p_holder + 1) == 'X')
-		return (ft_put_number_hex(va_arg (arg, unsigned int), 1, 1, &i));
-	else if (*p_holder == '#' && *(p_holder + 1) == 'x')
-		return (ft_put_number_hex(va_arg (arg, unsigned int), 0, 1, &i));
+	else if (*p_holder == 'd' || *p_holder == 'i')
+		return (ft_put_number(va_arg (arg, int), &i, 0));
 	else if ((*p_holder == '+' || *p_holder == ' ') && (*(p_holder + 1) == 'd' || *(p_holder + 1) == 'i'))
 		return (ft_put_number(va_arg (arg, int), &i, *p_holder));
+	else if (*p_holder == 'u')
+		return (ft_put_number(va_arg (arg, unsigned int), &i, 0));
+	else if (*p_holder == 'x' || *p_holder == 'X')
+		return (ft_put_number_hex(va_arg (arg, unsigned int), *p_holder, 0, &i));	
+	else if (*p_holder == 'p')
+		return (ft_put_number_hex(va_arg (arg, unsigned long long), *p_holder, 1, &i));
+	else if (*p_holder == '#' && (*(p_holder + 1) == 'X' || *(p_holder + 1) == 'x'))
+		return (ft_put_number_hex(va_arg (arg, unsigned int), *p_holder, 1, &i));
 	return (i);
 }
 
@@ -179,10 +174,10 @@ int	main(void)
 	//printf ("%d\n", ft_printf ("%i\n", -1234));
 	//ft_printf ("%#x\n", 255);
 	//ft_printf ("%#X\n", 255);
-	printf ("% d\n", +120);
-	printf ("% i\n", +120);
-	ft_printf ("% d\n", +120);
-	ft_printf ("% i\n", +120);
+	// printf ("% d\n", +120);
+	// printf ("% i\n", +120);
+	// ft_printf ("% d\n", +120);
+	// ft_printf ("% i\n", +120);
 	
 	// // printf ("%%\n");
 	//i = printf ("caracteres impresos: %d\n", printf ("1234\n"));
