@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:45:19 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/02/06 17:03:07 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/02/08 09:36:08 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_put_number(long long n, int *i)
 	return (*i);
 }
 
-int	ft_put_number_hex(unsigned long long n, int caps, int ptr, int *i)
+int	ft_put_num_hex(unsigned long long n, char p_holder, int ptr, int *i)
 {
 	if (ptr == 1)
 	{
@@ -75,17 +75,17 @@ int	ft_put_number_hex(unsigned long long n, int caps, int ptr, int *i)
 	}
 	if (n >= 16)
 	{
-		ft_put_number_hex(n / 16, caps, 0, i);
+		ft_put_num_hex(n / 16, p_holder, 0, i);
 		if (*i == -1)
 			return (-1);
-		ft_put_number_hex(n % 16, caps, 0, i);
+		ft_put_num_hex(n % 16, p_holder, 0, i);
 	}
 	else
 	{
-		if (caps == 0)
+		if (p_holder == 'x')
 			if (write (1, &(HEX_LOWER[n]), 1) != 1)
 				*i = -2;
-		if (caps == 1)
+		if (p_holder == 'X')
 			if (write (1, &(HEX_UPPER[n]), 1) != 1)
 				*i = -2;
 		(*i)++;
