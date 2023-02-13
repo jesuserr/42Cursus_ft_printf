@@ -6,13 +6,13 @@
 /*   By: jesuserr <jesuserr@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:21:44 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/02/08 09:35:46 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:55:10 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_actions(char const p_holder, va_list arg)
+static int	ft_actions(char const p_holder, va_list arg)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:35:36 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/02/08 13:52:57 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:56:24 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@
 int		ft_putchar(int c);
 int		ft_putstr(char *s);
 int		ft_put_number(long long n, int *i, char p_holder);
-int		ft_put_number_sign(long long n, int *i, char p_holder);
 int		ft_put_num_hex(unsigned long long n, char p_holder, int ptr, int *i);
-int		ft_put_num_hex_s(unsigned long long n, char p_holder, int ptr, int *i);
-int		ft_actions(char const *flag, va_list arg);
-int		ft_evaluate(char const *hold, va_list args);
 int		ft_printf(char const *hold, ...);
 
 #endif

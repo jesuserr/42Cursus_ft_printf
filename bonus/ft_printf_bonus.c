@@ -6,13 +6,13 @@
 /*   By: jesuserr <jesuserr@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:21:44 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/02/08 15:22:03 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:56:12 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	ft_actions(char const *flag, va_list arg)
+static int	ft_actions(char const *flag, va_list arg)
 {
 	int	i;
 
@@ -40,7 +40,7 @@ int	ft_actions(char const *flag, va_list arg)
 	return (i);
 }
 
-int	ft_evaluate(char const *hold, va_list args)
+static int	ft_evaluate(char const *hold, va_list args)
 {
 	int	i;
 	int	j;

@@ -6,13 +6,13 @@
 /*   By: jesuserr <jesuserr@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 11:45:19 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/02/08 15:28:57 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/02/13 10:58:19 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-int	ft_put_number_sign(long long n, int *i, char p_holder)
+static int	ft_put_number_sign(long long n, int *i, char p_holder)
 {
 	if ((p_holder == '+' || p_holder == ' ') && n >= 0)
 	{
@@ -25,7 +25,6 @@ int	ft_put_number_sign(long long n, int *i, char p_holder)
 		if (write (1, "-", 1) != 1)
 			return (-1);
 		(*i)++;
-		n = -n;
 	}
 	return (*i);
 }
@@ -54,7 +53,7 @@ int	ft_put_number(long long n, int *i, char p_holder)
 	return (*i);
 }
 
-int	ft_put_num_hex_s(unsigned long long n, char p_holder, int ptr, int *i)
+static int	ft_put_num_hex_s(unsigned long long n, char p_holder, int ptr, int *i)
 {
 	if (ptr == 1 && p_holder == 'p')
 	{
